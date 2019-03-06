@@ -3,12 +3,13 @@ plugins {
 	id 'com.diffplug.gradle.spotless' version '3.18.0'
 }
 
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.diffplug.gradle.spotless'
-
 group = 'me.nguba.net'
 version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
 
 ext {
     set('springCloudVersion', 'Greenwich.RELEASE')
@@ -16,10 +17,19 @@ ext {
     set('junit5Version', '4.0')
 }
 
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.diffplug.gradle.spotless'
+
+springBoot {
+    mainClassName = 'election.bully.ElectionBullyApplication'
+}
+
+
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
-    apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     
     sourceCompatibility = '1.8'
@@ -49,10 +59,6 @@ subprojects {
         testImplementation ("nl.jqno.equalsverifier:equalsverifier:3.+")
         testImplementation ("org.assertj:assertj-core:3.11.+")
     }
-}
-
-springBoot {
-    mainClassName = 'me.nguba.plant.PlantApplication'
 }
 
 
