@@ -17,30 +17,27 @@
 
 package election.bully;
 
-import java.net.InetAddress;
-
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class Node
+public final class Rank
 {
-    private final InetAddress address;
+    private final int value;
 
-    public Node(final InetAddress address)
+    private Rank(final int value)
     {
-        this.address = address;
+        this.value = value;
     }
 
-    @Override
-    public String toString()
+    public boolean isHigherThan(final Rank rank)
     {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Node [address=").append(address).append("]");
-        return builder.toString();
+        if (rank == null)
+            return true;
+        return value > rank.value;
     }
 
-    public static Node on(final InetAddress address)
+    public static Rank of(final int value)
     {
-        return new Node(address);
+        return new Rank(value);
     }
 }

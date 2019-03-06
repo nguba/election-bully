@@ -17,30 +17,21 @@
 
 package election.bully;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
 import java.net.InetAddress;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class Node
+class NodeTest
 {
-    private final InetAddress address;
-
-    public Node(final InetAddress address)
+    @Test
+    void showsInetAddressInToString() throws Exception
     {
-        this.address = address;
+        assertThat(Node.on(InetAddress.getLocalHost()).toString()).contains("address=");
     }
 
-    @Override
-    public String toString()
-    {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Node [address=").append(address).append("]");
-        return builder.toString();
-    }
-
-    public static Node on(final InetAddress address)
-    {
-        return new Node(address);
-    }
 }

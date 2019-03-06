@@ -17,30 +17,30 @@
 
 package election.bully;
 
-import java.net.InetAddress;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class Node
+class RankTest
 {
-    private final InetAddress address;
-
-    public Node(final InetAddress address)
+    @Test
+    void isNotHigher()
     {
-        this.address = address;
+        assertThat(Rank.of(1).isHigherThan(Rank.of(2))).isFalse();
     }
 
-    @Override
-    public String toString()
+    @Test
+    void isHigher()
     {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Node [address=").append(address).append("]");
-        return builder.toString();
+        assertThat(Rank.of(2).isHigherThan(Rank.of(1))).isTrue();
     }
 
-    public static Node on(final InetAddress address)
+    @Test
+    void isTrueWhenOtherIsNull()
     {
-        return new Node(address);
+        assertThat(Rank.of(2).isHigherThan(null)).isTrue();
     }
 }
