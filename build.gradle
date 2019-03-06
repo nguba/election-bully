@@ -1,0 +1,58 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.3.RELEASE'
+	id 'com.diffplug.gradle.spotless' version '3.18.0'
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.diffplug.gradle.spotless'
+
+group = 'me.nguba.net'
+version = '1.0.0-SNAPSHOT'
+
+ext {
+    set('springCloudVersion', 'Greenwich.RELEASE')
+    set('springBootVersion' , '2.1.3.RELEASE')
+    set('junit5Version', '4.0')
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+       
+    eclipse {
+        project {
+            // we need to do this so it doesn't conflict with other layered projects
+            name = "$rootProject.name-$project.name"
+        }
+    }
+   
+    test {
+        useJUnitPlatform()
+    }
+   
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+    
+    dependencies {  
+        testImplementation ("org.junit.jupiter:junit-jupiter-api:5.${junit5Version}")
+        testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.${junit5Version}")
+        testImplementation ("org.junit.platform:junit-platform-commons:1.${junit5Version}")
+        testImplementation ("org.junit.platform:junit-platform-engine:1.${junit5Version}")
+        testImplementation ("nl.jqno.equalsverifier:equalsverifier:3.+")
+        testImplementation ("org.assertj:assertj-core:3.11.+")
+    }
+}
+
+springBoot {
+    mainClassName = 'me.nguba.plant.PlantApplication'
+}
+
+
