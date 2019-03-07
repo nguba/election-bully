@@ -48,14 +48,14 @@ class NodeTest
     @DisplayName("don't respond to election request from higher rank")
     void doNotRespondToElection()
     {
-        assertThat(lower.respond(Election.from(higher))).isNull();
+        assertThat(lower.respond(StartElection.from(higher))).isNull();
     }
 
     @Test
     @DisplayName("respond to election request from lower rank")
     void respondToElection()
     {
-        assertThat(higher.respond(Election.from(lower))).isEqualTo(Acknowledged.from(higher));
+        assertThat(higher.respond(StartElection.from(lower))).isEqualTo(Acknowledged.from(higher));
     }
 
     @Test
@@ -70,5 +70,12 @@ class NodeTest
     void isLowerRank()
     {
         assertThat(lower.isHigherRank(higher)).isFalse();
+    }
+
+    @Test
+    @DisplayName("bully others to accept you as coordinator")
+    void declareYourselfTheCoordinator()
+    {
+        assertThat(higher.amCoordinator()).isEqualTo(CoordinatorElected.from(higher));
     }
 }

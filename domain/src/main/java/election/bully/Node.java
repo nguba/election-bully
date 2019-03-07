@@ -78,7 +78,7 @@ public final class Node
         return true;
     }
 
-    public Acknowledged respond(final Election from)
+    public Acknowledged respond(final StartElection from)
     {
         if (from.isHigherRank(this))
             return null;
@@ -89,5 +89,10 @@ public final class Node
     public boolean isHigherRank(final Node other)
     {
         return rank.isHigherThan(other.rank);
+    }
+
+    public CoordinatorElected amCoordinator()
+    {
+        return CoordinatorElected.from(this);
     }
 }

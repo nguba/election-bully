@@ -25,13 +25,13 @@ import org.junit.jupiter.api.Test;
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-class ElectionTest
+class StartElectionTest
 {
     @Test
     @DisplayName("true when higher rank than accpeting node")
     void isHigherRank()
     {
-        assertThat(Election.from(ObjectMother.nodeWithRank(2))
+        assertThat(StartElection.from(ObjectMother.nodeWithRank(2))
                 .isHigherRank(ObjectMother.nodeWithRank(1))).isTrue();
     }
 
@@ -39,7 +39,7 @@ class ElectionTest
     @DisplayName("false when lower rank than accpeting node")
     void isLowerRank()
     {
-        assertThat(Election.from(ObjectMother.nodeWithRank(1))
+        assertThat(StartElection.from(ObjectMother.nodeWithRank(1))
                 .isHigherRank(ObjectMother.nodeWithRank(2))).isFalse();
     }
 }

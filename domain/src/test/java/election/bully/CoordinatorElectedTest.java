@@ -17,25 +17,20 @@
 
 package election.bully;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class Election
+class CoordinatorElectedTest
 {
-    private final Node node;
-
-    private Election(final Node node)
+    @Test
+    @DisplayName("equality contract is implemented")
+    void equalityContract()
     {
-        this.node = node;
-    }
-
-    public static Election from(final Node node)
-    {
-        return new Election(node);
-    }
-
-    public boolean isHigherRank(final Node other)
-    {
-        return node.isHigherRank(other);
+        EqualsVerifier.forClass(CoordinatorElected.class).usingGetClass().verify();
     }
 }
