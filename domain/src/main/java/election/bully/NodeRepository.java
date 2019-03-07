@@ -18,34 +18,28 @@
 package election.bully;
 
 import java.net.InetAddress;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class Node
+public final class NodeRepository
 {
-    private final InetAddress address;
+    private final Map<InetAddress, Node> nodes = new ConcurrentHashMap<>();
 
-    public Node(final InetAddress address)
+    public void create(final Node node)
     {
-        this.address = address;
+        nodes.put(node.identity(), node);
     }
 
-    @Override
-    public String toString()
+    public Node read(final InetAddress address)
     {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Node [address=").append(address).append("]");
-        return builder.toString();
+        return nodes.get(address);
     }
 
-    public static Node on(final InetAddress address)
+    public void delete(final InetAddress address)
     {
-        return new Node(address);
-    }
-
-    public InetAddress identity()
-    {
-        return address;
+        nodes.remove(address);
     }
 }
