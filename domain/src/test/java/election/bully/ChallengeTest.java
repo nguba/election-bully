@@ -25,12 +25,12 @@ import org.junit.jupiter.api.Test;
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-class AcknowledgedTest
+class ChallengeTest
 {
     @Test
     @DisplayName("Equality contract is implemented")
     void equalityContract()
     {
-        EqualsVerifier.forClass(Acknowledged.class).usingGetClass().verify();
+        EqualsVerifier.forClass(Challenge.class).usingGetClass().verify();
     }
 }

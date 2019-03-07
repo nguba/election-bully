@@ -78,12 +78,12 @@ public final class Node
         return true;
     }
 
-    public Acknowledged respond(final StartElection from)
+    public Challenge respond(final StartElection from)
     {
         if (from.isHigherRank(this))
             return null;
 
-        return Acknowledged.from(this);
+        return Challenge.from(this);
     }
 
     public boolean isHigherRank(final Node other)

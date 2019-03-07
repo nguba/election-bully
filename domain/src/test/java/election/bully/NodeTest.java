@@ -55,7 +55,7 @@ class NodeTest
     @DisplayName("respond to election request from lower rank")
     void respondToElection()
     {
-        assertThat(higher.respond(StartElection.from(lower))).isEqualTo(Acknowledged.from(higher));
+        assertThat(higher.respond(StartElection.from(lower))).isEqualTo(Challenge.from(higher));
     }
 
     @Test

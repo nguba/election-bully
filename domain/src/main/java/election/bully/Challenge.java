@@ -20,18 +20,18 @@ package election.bully;
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class Acknowledged
+public final class Challenge
 {
     private final Node node;
 
-    private Acknowledged(final Node node)
+    private Challenge(final Node node)
     {
         this.node = node;
     }
 
-    public static Acknowledged from(final Node node)
+    public static Challenge from(final Node node)
     {
-        return new Acknowledged(node);
+        return new Challenge(node);
     }
 
     @Override
@@ -52,7 +52,7 @@ public final class Acknowledged
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Acknowledged other = (Acknowledged) obj;
+        final Challenge other = (Challenge) obj;
         if (node == null) {
             if (other.node != null)
                 return false;
