@@ -37,7 +37,7 @@ class NodeRepositoryTest
         address = InetAddress.getLocalHost();
     }
 
-    final Node expected = Node.on(address);
+    final Node expected = Node.with(address, Rank.of(2));
 
     final NodeRepository repo = new NodeRepository();
 

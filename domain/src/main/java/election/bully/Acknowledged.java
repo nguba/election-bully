@@ -17,38 +17,21 @@
 
 package election.bully;
 
-import java.net.InetAddress;
-
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class Node
+public final class Acknowledged
 {
-    private final InetAddress address;
-    private final Rank        rank;
+    private final Node node;
 
-    private Node(final InetAddress address, final Rank rank)
+    private Acknowledged(final Node node)
     {
-        this.address = address;
-        this.rank = rank;
+        this.node = node;
     }
 
-    @Override
-    public String toString()
+    public static Acknowledged from(final Node node)
     {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Node [address=").append(address).append(", rank=").append(rank).append("]");
-        return builder.toString();
-    }
-
-    public static Node with(final InetAddress address, final Rank rank)
-    {
-        return new Node(address, rank);
-    }
-
-    public InetAddress identity()
-    {
-        return address;
+        return new Acknowledged(node);
     }
 
     @Override
@@ -56,7 +39,7 @@ public final class Node
     {
         final int prime  = 31;
         int       result = 1;
-        result = (prime * result) + ((address == null) ? 0 : address.hashCode());
+        result = (prime * result) + ((node == null) ? 0 : node.hashCode());
         return result;
     }
 
@@ -69,25 +52,13 @@ public final class Node
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Node other = (Node) obj;
-        if (address == null) {
-            if (other.address != null)
+        final Acknowledged other = (Acknowledged) obj;
+        if (node == null) {
+            if (other.node != null)
                 return false;
-        } else if (!address.equals(other.address))
+        } else if (!node.equals(other.node))
             return false;
         return true;
     }
 
-    public Acknowledged respond(final Election from)
-    {
-        if (from.isHigherRank(this))
-            return null;
-
-        return Acknowledged.from(this);
-    }
-
-    public boolean isHigherRank(final Node other)
-    {
-        return rank.isHigherThan(other.rank);
-    }
 }

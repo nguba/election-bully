@@ -17,21 +17,58 @@
 
 package election.bully;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.net.InetAddress;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
 class NodeTest
 {
+    Node higher = ObjectMother.nodeWithRank(2);
+    Node lower  = ObjectMother.nodeWithRank(1);
+
     @Test
-    void showsInetAddressInToString() throws Exception
+    void toStringHasMandatoryInfo() throws Exception
     {
-        assertThat(Node.on(InetAddress.getLocalHost()).toString()).contains("address=");
+        assertThat(higher.toString()).contains("address=", "rank=");
     }
 
+    @Test
+    void equalityContract()
+    {
+        EqualsVerifier.forClass(Node.class).usingGetClass().withOnlyTheseFields("address").verify();
+    }
+
+    @Test
+    @DisplayName("don't respond to election request from higher rank")
+    void doNotRespondToElection()
+    {
+        assertThat(lower.respond(Election.from(higher))).isNull();
+    }
+
+    @Test
+    @DisplayName("respond to election request from lower rank")
+    void respondToElection()
+    {
+        assertThat(higher.respond(Election.from(lower))).isEqualTo(Acknowledged.from(higher));
+    }
+
+    @Test
+    @DisplayName("true when higher rank than other node")
+    void isHigherRank()
+    {
+        assertThat(higher.isHigherRank(lower)).isTrue();
+    }
+
+    @Test
+    @DisplayName("false when lower rank than other node")
+    void isLowerRank()
+    {
+        assertThat(lower.isHigherRank(higher)).isFalse();
+    }
 }
