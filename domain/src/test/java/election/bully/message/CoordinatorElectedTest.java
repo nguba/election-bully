@@ -15,8 +15,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package election.bully;
+package election.bully.message;
 
+import election.bully.message.CoordinatorElected;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.jupiter.api.DisplayName;
@@ -25,12 +26,12 @@ import org.junit.jupiter.api.Test;
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-class ChallengeTest
+class CoordinatorElectedTest
 {
     @Test
-    @DisplayName("Equality contract is implemented")
+    @DisplayName("equality contract is implemented")
     void equalityContract()
     {
-        EqualsVerifier.forClass(Challenge.class).usingGetClass().verify();
+        EqualsVerifier.forClass(CoordinatorElected.class).usingGetClass().verify();
     }
 }

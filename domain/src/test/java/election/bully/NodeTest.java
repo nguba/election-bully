@@ -17,6 +17,9 @@
 
 package election.bully;
 
+import election.bully.message.Challenge;
+import election.bully.message.CoordinatorElected;
+import election.bully.message.StartElection;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;

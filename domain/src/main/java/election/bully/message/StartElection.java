@@ -15,22 +15,45 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package election.bully;
+package election.bully.message;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import election.bully.Node;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-class CoordinatorElectedTest
+public final class StartElection extends ElectionMessage
 {
-    @Test
-    @DisplayName("equality contract is implemented")
-    void equalityContract()
+    private StartElection(final Node node)
     {
-        EqualsVerifier.forClass(CoordinatorElected.class).usingGetClass().verify();
+        super(node);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        return true;
+    }
+
+    public static StartElection from(final Node node)
+    {
+        return new StartElection(node);
+    }
+
+    public boolean isHigherRank(final Node other)
+    {
+        return node.isHigherRank(other);
     }
 }

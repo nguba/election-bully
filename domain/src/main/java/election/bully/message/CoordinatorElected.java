@@ -15,18 +15,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package election.bully;
+package election.bully.message;
+
+import election.bully.Node;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class CoordinatorElected
+public final class CoordinatorElected extends ElectionMessage
 {
-    private final Node node;
-
     private CoordinatorElected(final Node node)
     {
-        this.node = node;
+        super(node);
     }
 
     public static CoordinatorElected from(final Node node)
@@ -37,10 +37,7 @@ public final class CoordinatorElected
     @Override
     public int hashCode()
     {
-        final int prime  = 31;
-        int       result = 1;
-        result = (prime * result) + ((node == null) ? 0 : node.hashCode());
-        return result;
+        return super.hashCode();
     }
 
     @Override
@@ -48,15 +45,9 @@ public final class CoordinatorElected
     {
         if (this == obj)
             return true;
-        if (obj == null)
+        if (!super.equals(obj))
             return false;
         if (getClass() != obj.getClass())
-            return false;
-        final CoordinatorElected other = (CoordinatorElected) obj;
-        if (node == null) {
-            if (other.node != null)
-                return false;
-        } else if (!node.equals(other.node))
             return false;
         return true;
     }

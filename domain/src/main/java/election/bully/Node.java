@@ -17,6 +17,10 @@
 
 package election.bully;
 
+import election.bully.message.Challenge;
+import election.bully.message.CoordinatorElected;
+import election.bully.message.StartElection;
+
 import java.net.InetAddress;
 
 /**

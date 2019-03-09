@@ -15,9 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package election.bully;
+package election.bully.message;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import election.bully.message.Challenge;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,21 +26,12 @@ import org.junit.jupiter.api.Test;
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-class StartElectionTest
+class ChallengeTest
 {
     @Test
-    @DisplayName("true when higher rank than accpeting node")
-    void isHigherRank()
+    @DisplayName("Equality contract is implemented")
+    void equalityContract()
     {
-        assertThat(StartElection.from(ObjectMother.nodeWithRank(2))
-                .isHigherRank(ObjectMother.nodeWithRank(1))).isTrue();
-    }
-
-    @Test
-    @DisplayName("false when lower rank than accpeting node")
-    void isLowerRank()
-    {
-        assertThat(StartElection.from(ObjectMother.nodeWithRank(1))
-                .isHigherRank(ObjectMother.nodeWithRank(2))).isFalse();
+        EqualsVerifier.forClass(Challenge.class).usingGetClass().verify();
     }
 }

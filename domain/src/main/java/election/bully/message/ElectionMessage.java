@@ -15,27 +15,41 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package election.bully;
+package election.bully.message;
+
+import election.bully.Node;
+
+import java.util.Objects;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class StartElection
+public abstract class ElectionMessage
 {
-    private final Node node;
+    protected final Node node;
 
-    private StartElection(final Node node)
+    protected ElectionMessage(final Node node)
     {
         this.node = node;
     }
 
-    public static StartElection from(final Node node)
+    @Override
+    public int hashCode()
     {
-        return new StartElection(node);
+        return Objects.hash(node);
     }
 
-    public boolean isHigherRank(final Node other)
+    @Override
+    public boolean equals(final Object obj)
     {
-        return node.isHigherRank(other);
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final ElectionMessage other = (ElectionMessage) obj;
+        return Objects.equals(node, other.node);
     }
+
 }
