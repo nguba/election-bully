@@ -18,7 +18,7 @@
 package election.bully;
 
 import election.bully.message.Challenge;
-import election.bully.message.CoordinatorElected;
+import election.bully.message.Coordinator;
 import election.bully.message.StartElection;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
@@ -79,6 +79,6 @@ class NodeTest
     @DisplayName("bully others to accept you as coordinator")
     void declareYourselfTheCoordinator()
     {
-        assertThat(higher.amCoordinator()).isEqualTo(CoordinatorElected.from(higher));
+        assertThat(higher.amCoordinator()).isEqualTo(Coordinator.from(higher));
     }
 }

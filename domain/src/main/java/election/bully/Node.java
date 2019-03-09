@@ -18,7 +18,7 @@
 package election.bully;
 
 import election.bully.message.Challenge;
-import election.bully.message.CoordinatorElected;
+import election.bully.message.Coordinator;
 import election.bully.message.StartElection;
 
 import java.net.InetAddress;
@@ -95,8 +95,8 @@ public final class Node
         return rank.isHigherThan(other.rank);
     }
 
-    public CoordinatorElected amCoordinator()
+    public Coordinator amCoordinator()
     {
-        return CoordinatorElected.from(this);
+        return Coordinator.from(this);
     }
 }

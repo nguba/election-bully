@@ -17,38 +17,21 @@
 
 package election.bully.message;
 
-import election.bully.Node;
+import election.bully.message.Coordinator;
+import nl.jqno.equalsverifier.EqualsVerifier;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author <a href="mailto:nguba@mac.com">Nico Guba</a>
  */
-public final class CoordinatorElected extends ElectionMessage
+class CoordinatorTest
 {
-    private CoordinatorElected(final Node node)
+    @Test
+    @DisplayName("equality contract is implemented")
+    void equalityContract()
     {
-        super(node);
-    }
-
-    public static CoordinatorElected from(final Node node)
-    {
-        return new CoordinatorElected(node);
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(final Object obj)
-    {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        return true;
+        EqualsVerifier.forClass(Coordinator.class).usingGetClass().verify();
     }
 }
